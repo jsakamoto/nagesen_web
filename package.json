@@ -1,10 +1,14 @@
 {
   "name": "nagesen_nodejs",
   "version": "0.0.0",
-  "description": "",
+  "description": "nagesen nodejs test",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "engines": {
+    "node": "0.10.28",
+    "npm": "1.4.9"
   },
   "author": "",
   "license": "ISC",
