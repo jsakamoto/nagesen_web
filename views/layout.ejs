@@ -1,0 +1,20 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <% if ( titleName ) { %>
+  <% titleName(buf) %>
+  <% } else { %>
+  <title>投げ銭</title>
+  <% } %>
+  <link rel=stylesheet type=text/css href="/static/style.css">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+  <script src="//platform.twitter.com/widgets.js"></script>
+</head>
+<body>
+  <div id="container">
+    <% blockBody( buf ) %>
+  </div>
+</body>
+</html>

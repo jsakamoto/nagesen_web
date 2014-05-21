@@ -1,0 +1,85 @@
+<% function titleName (buf) { %>
+  <title>投げ銭BOX</title>
+<% } %>
+
+<% function blockBody (buf) { %>
+<div>
+<canvas id="canvas" width="800px" height="600px" style="border:red solid 1px;"></canvas>
+</div>
+
+<div id="buttonBox">
+  <button id="btn_10y"><img src="/static/coin.png" alt="10円" /></button>
+  <div id="totalYen">12,345 Yen</div>
+  <button id="btn_aori"><img src="/static/stone.png" alt="煽り銭" /></button>
+  <div id="totalDis">345,678 Dis</div>
+  <button id="btn_savebox">キャプチャ</button>
+  <button id="btn_reset">リセット</button>
+</div>
+<div style="padding-top:10px;">
+  <img id="capture" style="width:800px;" >
+</div>
+
+<script type="text/javascript" src="/static/js/Box2dWeb-2.1.a.3.min.js"></script>
+<script type="text/javascript" src="/static/js/myBox2D.js"></script>
+<script type="text/javascript" src="/static/js/box_capture.js"></script>
+<script type="text/javascript">
+<!--
+  //b2 = newBox2D(800, 600);
+  var world = startBox();
+
+  $('#btn_10y').click(function(e) {
+    world.throwRandom10y();
+  });
+
+  $('#btn_aori').click(function(e) {
+    world.throwRandomAori();
+  });
+
+  $('#btn_savebox').click(function(e) {
+    capture_img('canvas', 'capture');
+  });
+
+  $('#btn_reset').click(function(e) {
+    if(!confirm('BOXの中身をリセットしますか？', 'hoge')){
+      return;
+    }
+    world.resetBox();
+  });
+
+  function addFigure(str) {
+      var num = new String(str).replace(/,/g, "");
+      while(num != (num = num.replace(/^(-?\d+)(\d{3})/, "$1,$2")));
+      return num;
+  }
+
+  setInterval(function() {
+    var coinCounts = world.getCoinCounts();
+    var y10Price = coinCounts['10y'] * 10;
+    var aoriPrice = coinCounts['aori'] * 10;
+
+    $('#totalYen').html(addFigure(y10Price)  + ' Yen');
+    $('#totalDis').html(addFigure(aoriPrice) + ' Dis');
+  }, 500);
+//-->
+</script>
+
+<script type="text/javascript" src="/static/socket.io.js"></script>
+<script type="text/javascript">
+<!--
+  var socket = io.connect('/');
+  socket.emit('dummy', '');
+
+  socket.on('box', function(json) {
+    val_type = json['val_type'];
+    if ( val_type == '10y' ) {
+      world.throwRandom10y();
+    } else if ( val_type == 'aori' ) {
+      world.throwRandomAori();
+    }
+  });
+
+//--
+</script>
+<% } %>
+
+<% include layout %>

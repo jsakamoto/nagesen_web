@@ -1,0 +1,102 @@
+<% function titleName (buf) { %>
+  <title>投げ銭コントローラー</title>
+<% }; %>
+
+<% function blockBody (buf) { %>
+  <div id="controller">
+    <div id="items">
+      <div id="coin" class="item">
+        <img class="img-throwing" src="/static/coin.png">
+      </div>
+      <div id="stone" class="item">
+        <img class="img-throwing" src="/static/stone.png">
+      </div>
+    </div>
+    <div id="result">
+      <ul>
+        <li id="resultYen">0 Yen</li>
+        <li id="resultDis">0 Dis</li>
+      </ul>
+    </div>
+    <div id="buttons">
+      <input type="button" name="reset" value="Reset" id="buttonReset" />
+      <input type="button" name="tweet" value="Tweet" id="buttonTweet" />
+      <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+    </div>
+  </div>
+  
+  <script type="text/javascript" src="/static/socket.io.js"></script>
+  <script type=text/javascript>
+  <!--
+  var socket = io.connect('/');
+  socket.on('box', function() { console.log('receive client'); } ); // 何もしない
+
+  $(function() {
+    // スクロールを抑止する関数
+    function preventScroll(event) {
+      // img要素だけは、タップイベントに反応したいので、抑止しない。
+      // if (event.touches[0].target.tagName.toLowerCase() != "img") {return;}
+      // if (event.touches[0].target.tagName.toLowerCase() != "button") {return;}
+      // if (event.touches[0].target.tagName.toLowerCase() != "div") {return;}
+
+      // preventDefaultでブラウザ標準動作を抑止する。
+      event.preventDefault();
+    }
+
+    // タッチイベントの初期化
+    document.addEventListener("touchstart", preventScroll, false);
+    document.addEventListener("touchmove", preventScroll, false);
+    document.addEventListener("touchend", preventScroll, false); 
+    // ジェスチャーイベントの初期化
+    document.addEventListener("gesturestart", preventScroll, false);
+    document.addEventListener("gesturechange", preventScroll, false);
+    document.addEventListener("gestureend", preventScroll, false);
+
+
+    function updateInfo(ItemsCnt, $target){
+      $('#resultYen').html(ItemsCnt.pay + ' Yen');
+      $('#resultDis').html(ItemsCnt.damage + ' Dis');
+
+      if($target !== undefined){
+        $target.removeClass().addClass('slideOutUp animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+          $(this).removeClass();
+        });
+      }
+    }
+
+    ItemsCnt = {
+      pay : 0,
+      damage : 0
+    };
+
+    $('#coin>img').on('touchstart click', ItemsCnt, function() {
+      socket.emit('nagesen', { val_type: '10y' });
+      ItemsCnt.pay += 10;
+      updateInfo(ItemsCnt, $(this));
+    });
+    $('#stone>img').on('touchstart click', ItemsCnt, function() {
+      socket.emit('nagesen', { val_type: 'aori' });
+      ItemsCnt.damage += 10;
+      updateInfo(ItemsCnt, $(this));
+    });
+    $('input[name=reset]').on('touchstart click', ItemsCnt, function(){
+      if(!confirm('投げ銭とDisをリセットしますか？', 'hoge')){
+        return;
+      }
+      ItemsCnt.pay = 0;
+      ItemsCnt.damage = 0;
+      updateInfo(ItemsCnt);
+    });
+    $('input[name=tweet]').on('touchstart click', ItemsCnt, function(){
+      var text = 'この枠に' + ItemsCnt.pay + '円分の投げ銭と' + ItemsCnt.damage + 'Disをしました☆';
+      var url = 'https://twitter.com/share?';
+      url += 'text=' + encodeURIComponent(text);
+      url += '&hashtags=ohotech';
+      window.open(url, 'tweet');
+    });
+  });
+  //-->
+  </script>
+<% }; %>
+
+<% include layout %>
