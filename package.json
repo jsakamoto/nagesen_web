@@ -12,6 +12,12 @@
   },
   "author": "",
   "license": "ISC",
+  "dependencies": {
+    "ejs": "^1.0.0",
+    "express": "^4.3.0",
+    "morgan": "^1.1.1",
+    "socket.io": "^0.9.16"
+  },
   "devDependencies": {
     "ejs": "^1.0.0",
     "express": "^4.3.0",
