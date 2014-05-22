@@ -31,8 +31,8 @@ app.get('/qr', function (req, res) {
   qr.addData(req.headers.host);
   qr.make(); 
 
-  if (req.params.s && isFinite(req.params.s)) {
-    size = +req.params.s;
+  if (req.query.s && isFinite(req.query.s)) {
+    size = +req.query.s;
     if (size > 20) size = 20;
     if (size < 1 ) size = 1;
   }
