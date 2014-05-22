@@ -1,8 +1,9 @@
 var express = require('express'),
     path = require('path'),
-    morgan = require('morgan'),
     app = express(),
-    router = express.Router();
+    router = express.Router(),
+    qrCode = require('qrcode-npm/qrcode'),
+    morgan = require('morgan');
 
 app.use(morgan());
 
@@ -22,6 +23,21 @@ app.get('/box', function (req, res) {
 
 var server = app.listen(process.env.PORT || 3000, function() {
   console.log('Listening on port %d...', server.address().port);
+});
+
+app.get('/qr', function (req, res) {
+  var size = 4;
+  var qr = qrCode.qrcode(4, 'M');
+  qr.addData(req.headers.host);
+  qr.make(); 
+
+  if (req.params.s && isFinite(req.params.s)) {
+    size = +req.params.s;
+    if (size > 20) size = 20;
+    if (size < 1 ) size = 1;
+  }
+
+  res.render('qr', { imgTag: qr.createImgTag(size) });
 });
 
 var io = require('socket.io').listen(server, {'log level': 1});
