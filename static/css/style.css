@@ -54,7 +54,7 @@ body
 {
   position: relative;
   top: 0px;
-  background-image: url(/static/bg.png);
+  background-image: url(/static/img/bg.png);
   user-select: none;
   -moz-user-select: none;
   -webkit-user-select: none;
@@ -85,12 +85,12 @@ body
 
 #coin
 {
-  background-image: url(/static/coin.png);
+  background-image: url(/static/img/coin.png);
 }
 
 #stone
 {
-  background-image: url(/static/stone.png);
+  background-image: url(/static/img/stone.png);
 }
 
 .item

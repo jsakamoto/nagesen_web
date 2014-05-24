@@ -11,8 +11,8 @@ var CONFIG = {
     'radius_aori': 15.0,
   },
   asset: {
-    'imgUrl_10y':  '/static/coin.png',
-    'imgUrl_aori': '/static/stone.png',
+    'imgUrl_10y':  '/static/img/coin.png',
+    'imgUrl_aori': '/static/img/stone.png',
     'seUrl_10y':   '/static/se/yen.mp3',
     'seUrl_aori':  '/static/se/coin.mp3',
     'seUrl_1up':   '/static/se/1up.wav',
