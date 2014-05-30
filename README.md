@@ -23,7 +23,7 @@
 ## ローカルで使う場合
 
 ``` shell
-$ git clone ohotech/nagesen_web.git nagesen
+$ git clone https://github.com/ohotech/nagesen_web.git nagesen
 $ cd nagesen
 $ npm install
 $ node app
