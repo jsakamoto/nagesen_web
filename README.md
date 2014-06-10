@@ -37,7 +37,7 @@ Listening on port 3000...
 ``` shell
 $ heroku login # ssh公開鍵登録　一度行えばよい
 $ heroku create [subdomain] # [subdomain]の取得 
-$ git clone ohotech/nagesen_web.git nagesen
+$ git clone https://github.com/ohotech/nagesen_web.git nagesen
 $ cd nagesen
 $ git push heroku master
 $ heroku ps:scale web=1 # 無料枠内での起動
