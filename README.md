@@ -26,8 +26,8 @@
 $ git clone https://github.com/ohotech/nagesen_web.git nagesen
 $ cd nagesen
 $ npm install
-$ node app
-Listening on port 3000...
+$ node app -p <port>
+Listening on port <port>...
 ```
 
 ## heroku で使う場合
