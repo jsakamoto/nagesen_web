@@ -4,7 +4,6 @@ var express = require('express'),
     router = express.Router(),
     qrCode = require('qrcode-npm/qrcode'),
     morgan = require('morgan'),
-    http = require('http'),
     opts = require('opts');
 
 app.use(morgan());
@@ -33,12 +32,12 @@ opts.parse([
   },
 ]);
 
-var port = opts.get('port') || 3000
+var port = process.env.PORT || opts.get('port') || 3000
 
-var server = http.createServer(function() {
-console.log('Listening on port %d...', server.address().port);
+var server = app.listen(port, function() {
+  console.log('Listening on port %d...', server.address().port);
 });
-app.listen(port);
+
 
 app.get('/qr', function (req, res) {
   var size = 4;
