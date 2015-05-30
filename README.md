@@ -8,19 +8,14 @@
     /box        | 投げ銭BOX
     /qr         | 投げ銭クライアントへのQRコード発行
 
-## 準備するもの
+## ローカルで使う場合
 
-### 共通
+### 準備するもの
 
 * Gitクライアント
 * Node.js実行環境(node v0.10.26, npm v1.4.9)
 
-### herokuで動かす場合
-
-* heroku アカウント
-* heroku toolbelt( [ダウンロードページ](https://toolbelt.heroku.com/) )
-
-## ローカルで使う場合
+### 手順
 
 ``` shell
 $ git clone https://github.com/ohotech/nagesen_web.git nagesen
@@ -30,7 +25,16 @@ $ node app -p <port>
 Listening on port <port>...
 ```
 
-## heroku で使う場合
+##  herokuで動かす場合
+
+### 準備するもの
+
+* Gitクライアント
+* Node.js実行環境(node v0.10.26, npm v1.4.9)
+* heroku アカウント
+* heroku toolbelt( [ダウンロードページ](https://toolbelt.heroku.com/) )
+
+### 手順
 
 * ここでは、「[subdomain].herokuapp.com」に投げ銭を設置したい例です。
 
@@ -44,3 +48,17 @@ $ heroku ps:scale web=1 # 無料枠内での起動
 $ heroku logs # 起動確認
 $ heroku ps:scale web=0 # 終了
 ```
+
+## Azure Web Apps で動かす場合
+
+### 準備するもの
+
+* Azure アカウント
+
+### 手順
+
+下の「Deploy to Azure」ボタンをクリックし、表示される Web サイトの指示に従ってください。
+
+[![Deploy to Azure](https://azuredeploy.net/deploybutton.png)](https://azuredeploy.net/)
+
+投げ銭 for Web は Azure Web Apps の無料枠内で実行できます。
